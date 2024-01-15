@@ -13,11 +13,20 @@
 <!-- 필터선택페이지 -->
 <div class="upload-image" :style="`background-image: url(${imgUrl})`">{{ imgUrl }}</div>
   <div class="filters">
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
+    <FilterBox v-for="filter in filters" :key="filter" :imgUrl="imgUrl" :filter="filter" >
+
+      <!-- FilterBox 컴포넌트 안에 slot 이미 선언해놓음 -->
+      슬롯에 바로 꽂힐 HTML 표출 데이터적기
+      <span>{{ fillter }}</span>
+
+      <!-- slot 이 여러개일때 -->
+      <!-- <slot name="a"></slot> -->
+      <template v-slot:a>
+        <span>multi slot data1</span>
+      </template>
+      <!-- <slot name="b"></slot> -->
+      <template v-slot:b>multi slot data2</template>
+    </FilterBox>
   </div>
   </div>
 
@@ -40,10 +49,11 @@
 
 <script>
 import Post from '../components/Post.vue'
+import FilterBox from '../components/FilterBox.vue'
 
 export default {
     name:'Container',
-    components:{Post},
+    components:{Post,FilterBox},
     props:{
       list:Array,         
       step:Number,
@@ -51,6 +61,9 @@ export default {
 },
     data(){
       return{
+        filters:[ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+"inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+"reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
       }
     }
 
