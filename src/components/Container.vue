@@ -27,7 +27,10 @@
 <!-- style 에 업로드한 이미지 넣기 -->
 <div class="upload-image" ></div>
   <div class="write">
-    <textarea class="write-box">write!</textarea>
+
+    <!-- 작성한 글 App.vue 로 올려보내기  -->
+    <!-- $emit : textareat 의 value 값을 부모 App.vue 로 보내기 -->
+    <textarea @input="$emit('write',$event.target.value)" class="write-box">write!</textarea>
   </div>
 
 </div>

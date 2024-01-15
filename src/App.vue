@@ -13,14 +13,18 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <!-- when you click the button + the step number -->
+      <!-- if your step number become 1, publish the text -->
+      <li v-if="step==1" @click="step++">Next</li>
+      <!-- if your step number become 2, show Publish -->
+      <li v-if="step==2" @click="publish">Publish</li>
     </ul>
     <img src="./assets/logo.svg" class="logo" />
   </div>
 
   <!-- props 전달 :step="step" -->
   <!-- props 내려보낼 component 에 전달 :imgUrl="imgUrl" -->
-  <Container v-bind:list="list" :step="step" :imgUrl="imgUrl" />
+  <Container v-bind:list="list" :step="step" :imgUrl="imgUrl" @write="writed=$event" />
   
   <button @click="more">Show More</button>
 
@@ -42,7 +46,6 @@
 import Container from './components/Container.vue'
 import list from './assets/list.js'
 import axios from 'axios'
-// axios.get()
 
 export default {
   name:'App',
@@ -51,7 +54,8 @@ export default {
     return {
       list:list,
       step:0,
-      imgUrl:''
+      imgUrl:'',
+      writed:''
     }
   },
   components:{Container},
@@ -98,8 +102,33 @@ export default {
   // 가져온 props step 활용
   this.step++;
 
-    }
+    },
 
+    // 글 발행시키기 
+    publish(){
+      // 데이터를 넣을 공간을 만들어서 this.list.unshift(myList) 로 {내가쓴것} 집어넣기 
+      const myList = {
+        // 객체 안의 양식은 기존 list 객체와 같아야 문제가 없을것이다.
+        name: "Kim Hyun",
+
+      userImage: "https://picsum.photos/100?random=3",
+      // postImage: "내가 업로드한 이미지 URL",
+      postImage: this.imgUrl,
+      likes: 36,
+      date: "May 15",
+      liked: false,
+      
+      // content: "내가 입력한 글",
+      content: this.writed,
+      filter: "perpetua"
+      };
+      // .unshift() 왼쪽 array 에 자료를 집어넣음
+      // this.myList 에 {내가쓴것} 집어넣기
+      this.list.unshift(myList);
+      // 그리고 발행이 끝나면 메인 페이지 0 으로 돌리기
+      this.step=0;
+    }
+ 
 
   }
 
