@@ -8,7 +8,8 @@
     <!-- `url(${})` 템플릿 리터럴 사용 -->
     <div class="post-body" :style="{backgroundImage: `url(${list.postImage})`}"></div>
     <div class="post-content">
-      <p>{{ list.likes }}</p>
+      <!-- <p>{{ list.likes }}</p> -->
+      <p @click="$store.commit('하트변경')">{{ $store.state.likes }}</p>
       <p><strong>글쓴이아이디</strong>{{ list.content }}</p>
       <p class="date">{{ list.date }}</p>
     </div>

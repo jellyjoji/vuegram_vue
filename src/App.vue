@@ -6,6 +6,12 @@
  <button @click="step = 1">button2</button>
  <button @click="step = 2">button3</button> -->
 
+ <button @click="$store.commit('이름변경')">이름변경</button>
+ <!-- <button @click="$store.commit('나이변경',store.js에 전달하는 데이터)">나이변경</button> -->
+ <button @click="$store.commit('나이변경',10)">나이변경</button>
+
+ <button @click="$store.commit('하트변경')">하트</button>
+
 
   <!-- {{ list }} -->
   <div class="header">
@@ -53,7 +59,7 @@ export default {
     // 여기 담긴 속성들만 props 전달할수있다.
     return {
       list:list,
-      step:1,
+      step:0,
       imgUrl:'',
       writed:''
     }
