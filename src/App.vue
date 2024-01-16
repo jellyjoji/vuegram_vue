@@ -6,6 +6,10 @@
  <button @click="step = 1">button2</button>
  <button @click="step = 2">button3</button> -->
 
+  <!-- 버튼을 클릭하면 actions 의 ajax getData 를 실행시켜주세요. 그리고 mutation 으로 state 를 변경시켜서 p 에 출력해주세요 -->
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">more</button>
+
  <button @click="$store.commit('이름변경')">이름변경</button>
  <!-- <button @click="$store.commit('나이변경',store.js에 전달하는 데이터)">나이변경</button> -->
  <button @click="$store.commit('나이변경',10)">나이변경</button>

@@ -1,4 +1,5 @@
-import {createStore} from 'vuex'
+import axios from 'axios';
+import {createStore} from 'vuex';
 
 const store = createStore({
 	state(){
@@ -7,7 +8,10 @@ const store = createStore({
 			age:20,
 			likes:30,
 			// 좋아요 버튼 토글용 boolean
-			likeClicked:false
+			likeClicked:false,
+
+			// object 자료형을 {} 안에 가져와서 넣기
+			more:{}
 			}
 		},
 	mutations:{	
@@ -22,6 +26,11 @@ const store = createStore({
 			const sum=state.age+=payload;
 			console.log(sum);
 		},
+		// 하트변경(state){
+		// 	const heart = state.likes++;
+		// 	console.log(heart);
+		// }
+		
 		// likes 하트 토글버튼 만들기 : 조건식 적용
 		하트변경(state){
 			// 좋아요가 눌렸는지 여부 상태 체크 == false
@@ -37,12 +46,24 @@ const store = createStore({
 				state.likeClicked=false;				
 					
 			}
+		},
+		// 받아온 데이터 payload 를 more 안에 넣어주세요
+		setMore(state, payload){
+			state.more = payload
+		}		
+	},
+	actions:{
+		// (파라미터) 에 들어가는 값은 모두 $store 라고 생각하면 된다.
+		getData(context){
+			axios.get('https://codingapple1.github.io/vue/more0.json')
+			// then 으로 응답받은 데이터를 a 인수로 받는다
+			.then((a)=>{
+				// .data :  a 변수의 'data 속성'을 콘솔에 출력
+				console.log(a.data);
+				// setMore 작동시켜서 a.data 넣어주세요
+				context.commit('setMore',a.data)
+			})
 		}
-		// 하트변경(state){
-		// 	const heart = state.likes++;
-		// 	console.log(heart);
-		// }
-		
 	}
 })
 export default store;
