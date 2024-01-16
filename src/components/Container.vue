@@ -1,4 +1,9 @@
 <template>
+
+<div v-if="step == 3">
+  <MyPage/>
+</div>
+
     <div v-if="step == 0">
       Container
       <!-- {{ list }} -->
@@ -50,10 +55,11 @@
 <script>
 import Post from '../components/Post.vue'
 import FilterBox from '../components/FilterBox.vue'
+import MyPage from '../components/MyPage.vue'
 
 export default {
     name:'Container',
-    components:{Post,FilterBox},
+    components:{Post,FilterBox,MyPage},
     props:{
       list:Array,         
       step:Number,

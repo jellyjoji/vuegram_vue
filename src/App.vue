@@ -63,7 +63,7 @@ export default {
     // 여기 담긴 속성들만 props 전달할수있다.
     return {
       list:list,
-      step:0,
+      step:3,
       imgUrl:'',
       writed:''
     }
